@@ -3,8 +3,8 @@ var knox = require('knox');
 var fs = require('fs')
 
 var UserImageUploader = function(options){
-  //deffered is used to handle async functions with callbacks (rather than asynch promises)
-  //deffered is a deffered object that returns a promise to the caller (ImageUploader() in imageRoutes.js)
+  //deferred is used to handle async functions with callbacks (rather than async promises)
+  //deferred is a deferred object that returns a promise to the caller (ImageUploader() in imageRoutes.js)
   //so the .then() on ImageUploader will not fire until deferred in this file is resolved or rejected
   var deferred = Q.defer();
   var buf = new Buffer(options.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
@@ -37,7 +37,7 @@ var UserImageUploader = function(options){
       deferred.reject({error: 'true'});
   });
 
-  //start the requset by sending the file as a buffer to the s3 Bucket
+  //start the request by sending the file as a buffer to the s3 Bucket
   req.end(buf);
   //return a promise object to ImageUploader() in imageRoutes.js
   return deferred.promise;
